@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/main.js}" defer></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <header>
+            <h1>Admin Dashboard</h1>
+            <div class="user-info">
+                <span>Welcome, <strong sec:authentication="name">Admin</strong></span>
+                <form th:action="@{/logout}" method="post" style="display: inline;">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-secondary">Logout</button>
+                </form>
+            </div>
+        </header>
+
+        <div th:if="${param.approved}" class="alert alert-success">
+            Enrollment approved successfully!
+        </div>
+
+        <div th:if="${param.rejected}" class="alert alert-info">
+            Enrollment rejected.
+        </div>
+
+        <div th:if="${param.graded}" class="alert alert-success">
+            Grade submitted successfully!
+        </div>
+
+        <div class="content">
+            <section class="section">
+                <h2>Pending Enrollment Requests</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Major</th>
+                                <th>Course Code</th>
+                                <th>Course Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${pendingEnrollments.isEmpty()}">
+                                <td colspan="6" style="text-align: center;">No pending enrollments</td>
+                            </tr>
+                            <tr th:each="enrollment : ${pendingEnrollments}">
+                                <td th:text="${enrollment.student.id}">ID</td>
+                                <td th:text="${enrollment.student.name}">Name</td>
+                                <td th:text="${enrollment.student.major}">Major</td>
+                                <td th:text="${enrollment.course.code}">Code</td>
+                                <td th:text="${enrollment.course.name}">Course</td>
+                                <td class="action-buttons">
+                                    <form th:action="@{/admin/approve/{id}(id=${enrollment.id})}" method="post" style="display: inline;">
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                        <button type="submit" class="btn btn-small btn-success">Approve</button>
+                                    </form>
+                                    <form th:action="@{/admin/reject/{id}(id=${enrollment.id})}" method="post" style="display: inline;">
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                        <button type="submit" class="btn btn-small btn-danger">Reject</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Grade Management - Approved Enrollments</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Student Name</th>
+                                <th>Course Code</th>
+                                <th>Course Name</th>
+                                <th>Current Grade</th>
+                                <th>Status</th>
+                                <th>Grade Submission</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${approvedEnrollments == null or approvedEnrollments.isEmpty()}">
+                                <td colspan="7" style="text-align: center;">No approved enrollments to grade</td>
+                            </tr>
+                            <tr th:each="enrollment : ${approvedEnrollments}">
+                                <td th:text="${enrollment.student.id}">ID</td>
+                                <td th:text="${enrollment.student.name}">Name</td>
+                                <td th:text="${enrollment.course.code}">Code</td>
+                                <td th:text="${enrollment.course.name}">Course</td>
+                                <td>
+                                    <span th:if="${enrollment.grade != null}" th:text="${enrollment.grade}">Grade</span>
+                                    <span th:if="${enrollment.grade == null}" style="color: #999;">Not graded</span>
+                                </td>
+                                <td>
+                                    <span th:if="${enrollment.grade != null}">
+                                        <span th:text="${enrollment.passed} ? '✓ PASSED' : '✗ FAILED'"
+                                              th:class="${enrollment.passed} ? 'text-success' : 'text-error'"
+                                              style="font-weight: bold;">
+                                        </span>
+                                    </span>
+                                    <span th:if="${enrollment.grade == null}" style="color: #999;">Pending</span>
+                                </td>
+                                <td>
+                                    <form th:action="@{/admin/grade/{id}(id=${enrollment.id})}" method="post" class="grade-form">
+                                        <div class="form-group">
+                                            <input type="number" 
+                                                   name="grade" 
+                                                   placeholder="0-100" 
+                                                   min="0" 
+                                                   max="100" 
+                                                   step="0.01"
+                                                   th:value="${enrollment.grade}"
+                                                   required
+                                                   style="width: 80px;">
+                                        </div>
+                                        <div class="form-group">
+                                            <select name="passed" required style="width: 100px;">
+                                                <option value="">Select</option>
+                                                <option value="true" th:selected="${enrollment.passed == true}">Pass</option>
+                                                <option value="false" th:selected="${enrollment.passed == false}">Fail</option>
+                                            </select>
+                                        </div>
+                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                        <button type="submit" class="btn btn-small btn-primary">Submit Grade</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>All Courses</h2>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Course Name</th>
+                                <th>Instructor(s)</th>
+                                <th>Prerequisites</th>
+                                <th>Total Enrollments</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="course : ${courses}">
+                                <td th:text="${course.code}">Code</td>
+                                <td th:text="${course.name}">Name</td>
+                                <td>
+                                    <span th:each="instructor, iterStat : ${course.instructors}">
+                                        <span th:text="${instructor.name}">Instructor</span>
+                                        <span th:if="${!iterStat.last}">, </span>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span th:if="${course.prerequisites.isEmpty()}">None</span>
+                                    <span th:if="${!course.prerequisites.isEmpty()}">
+                                        <span th:each="prereq, iterStat : ${course.prerequisites}">
+                                            <span th:text="${prereq.code}">Code</span>
+                                            <span th:if="${!iterStat.last}">, </span>
+                                        </span>
+                                    </span>
+                                </td>
+                                <td th:text="${course.enrollments.size()}">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

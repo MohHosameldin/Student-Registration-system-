@@ -2,8 +2,11 @@ package com.university.registration.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode; 
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import lombok.ToString; 
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,6 +15,8 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"enrollments"})
+@ToString(exclude = {"enrollments"}) 
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
@@ -31,5 +36,11 @@ public class Student {
     public enum Major {
         COMPUTER_ENGINEERING,
         MECHANICAL_ENGINEERING
+    }
+
+    public Student(Long id, String name, Major major) {
+        this.id = id;
+        this.name = name;
+        this.major = major;
     }
 }

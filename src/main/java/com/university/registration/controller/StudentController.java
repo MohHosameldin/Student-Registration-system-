@@ -1,7 +1,6 @@
 package com.university.registration.controller;
 
 import com.university.registration.entity.User;
-import com.university.registration.entity.Enrollment;
 import com.university.registration.repository.UserRepository;
 import com.university.registration.service.CourseRegistrationService;
 import lombok.RequiredArgsConstructor;

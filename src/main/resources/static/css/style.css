@@ -1,0 +1,574 @@
+:root {
+    /* Ferrari Colors */
+    --ferrari-red: #DC0000;
+    --ferrari-dark-red: #8B0000;
+    --ferrari-yellow: #FFF200;
+    --ferrari-black: #000000;
+    --ferrari-white: #FFFFFF;
+    --ferrari-grey: #2B2B2B;
+    
+    /* Academic Colors */
+    --academic-navy: #002147;
+    --academic-gold: #C5A572;
+    --academic-light-grey: #F5F5F5;
+    --academic-dark-grey: #333333;
+    
+    /* Status Colors */
+    --success-green: #28a745;
+    --warning-yellow: #ffc107;
+    --danger-red: #dc3545;
+    --info-blue: #17a2b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--academic-navy) 0%, var(--ferrari-grey) 100%);
+    min-height: 100vh;
+    color: var(--ferrari-black);
+}
+
+/* Login Page Styles */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-box {
+    background: var(--ferrari-white);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(220, 0, 0, 0.3);
+    max-width: 450px;
+    width: 100%;
+    border-top: 5px solid var(--ferrari-red);
+    border-bottom: 3px solid var(--academic-gold);
+    position: relative;
+    overflow: hidden;
+}
+
+.login-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--ferrari-yellow), transparent);
+    animation: shine 3s infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    50%, 100% { left: 100%; }
+}
+
+.login-box h1 {
+    color: var(--ferrari-red);
+    font-size: 28px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-box h2 {
+    color: var(--academic-navy);
+    font-size: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 400;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+    min-height: 100vh;
+    padding-bottom: 40px;
+}
+
+/* Header Styles */
+header {
+    background: linear-gradient(135deg, var(--ferrari-red) 0%, var(--ferrari-dark-red) 100%);
+    color: var(--ferrari-white);
+    padding: 25px 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 4px solid var(--academic-gold);
+    position: relative;
+}
+
+header::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        var(--ferrari-yellow) 0%, 
+        var(--ferrari-yellow) 30%, 
+        transparent 30%, 
+        transparent 100%);
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.user-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.user-info span {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.badge {
+    background: var(--academic-gold) !important;
+    color: var(--ferrari-black) !important;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* Content Area */
+.content {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 40px;
+}
+
+/* Section Styles */
+.section {
+    background: var(--ferrari-white);
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+    border-left: 6px solid var(--ferrari-red);
+    position: relative;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, transparent 50%, rgba(220, 0, 0, 0.05) 50%);
+    border-radius: 0 15px 0 0;
+}
+
+.section h2 {
+    color: var(--academic-navy);
+    font-size: 24px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid var(--ferrari-red);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: var(--ferrari-yellow);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--academic-navy);
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: var(--ferrari-white);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--ferrari-red);
+    box-shadow: 0 0 0 3px rgba(220, 0, 0, 0.1);
+}
+
+/* Button Styles */
+.btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--ferrari-red) 0%, var(--ferrari-dark-red) 100%);
+    color: var(--ferrari-white);
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(220, 0, 0, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(220, 0, 0, 0.4);
+}
+
+.btn-secondary {
+    background: var(--academic-navy);
+    color: var(--ferrari-white);
+}
+
+.btn-secondary:hover {
+    background: var(--academic-gold);
+    color: var(--ferrari-black);
+}
+
+.btn-success {
+    background: var(--success-green);
+    color: var(--ferrari-white);
+}
+
+.btn-success:hover {
+    background: #218838;
+}
+
+.btn-danger {
+    background: var(--ferrari-red);
+    color: var(--ferrari-white);
+}
+
+.btn-danger:hover {
+    background: var(--ferrari-dark-red);
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+/* Table Styles */
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background: linear-gradient(135deg, var(--academic-navy) 0%, var(--ferrari-grey) 100%);
+    color: var(--ferrari-white);
+}
+
+thead th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
+    border-bottom: 3px solid var(--ferrari-red);
+}
+
+tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #eee;
+}
+
+tbody tr:hover {
+    background: linear-gradient(90deg, 
+        rgba(220, 0, 0, 0.05) 0%, 
+        rgba(255, 242, 0, 0.05) 100%);
+    transform: scale(1.01);
+}
+
+tbody td {
+    padding: 15px;
+    color: var(--ferrari-black);
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Status Badges */
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-pending {
+    background: var(--warning-yellow);
+    color: var(--ferrari-black);
+}
+
+.status-approved {
+    background: var(--success-green);
+    color: var(--ferrari-white);
+}
+
+.status-rejected {
+    background: var(--danger-red);
+    color: var(--ferrari-white);
+}
+
+/* Alert Styles */
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-left: 5px solid;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border-color: var(--success-green);
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: var(--danger-red);
+}
+
+.alert-info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border-color: var(--info-blue);
+}
+
+/* Action Buttons Container */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Info Box */
+.info-box {
+    background: linear-gradient(135deg, rgba(220, 0, 0, 0.05) 0%, rgba(255, 242, 0, 0.05) 100%);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 25px;
+    border: 2px solid rgba(220, 0, 0, 0.2);
+}
+
+.info-box h3 {
+    color: var(--ferrari-red);
+    margin-bottom: 10px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.info-box p {
+    margin: 8px 0;
+    color: var(--ferrari-grey);
+    font-size: 14px;
+}
+
+/* Text Utilities */
+.text-success {
+    color: var(--success-green);
+    font-weight: 700;
+}
+
+.text-error {
+    color: var(--danger-red);
+    font-weight: 700;
+}
+
+/* Grade Form Styles */
+.grade-form {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.grade-form .form-group {
+    margin-bottom: 0;
+    flex: 1;
+    min-width: 100px;
+}
+
+.grade-form input,
+.grade-form select {
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .content {
+        padding: 0 20px;
+        margin: 20px auto;
+    }
+    
+    header {
+        padding: 20px;
+    }
+    
+    header h1 {
+        font-size: 24px;
+    }
+    
+    .user-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .section {
+        padding: 20px;
+    }
+    
+    .section h2 {
+        font-size: 20px;
+    }
+    
+    table {
+        font-size: 14px;
+    }
+    
+    thead th,
+    tbody td {
+        padding: 10px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .btn-small {
+        width: 100%;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(220, 0, 0, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--ferrari-red);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Ferrari Racing Stripe Decoration */
+.racing-stripe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, 
+        var(--ferrari-red) 0%, 
+        var(--ferrari-red) 45%, 
+        var(--ferrari-yellow) 45%, 
+        var(--ferrari-yellow) 55%, 
+        var(--ferrari-red) 55%, 
+        var(--ferrari-red) 100%);
+    z-index: 9999;
+}

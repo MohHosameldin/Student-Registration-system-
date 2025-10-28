@@ -98,6 +98,10 @@ public class CourseRegistrationService {
         return enrollmentRepository.findByStatus(Enrollment.Status.PENDING);
     }
 
+    public List<Enrollment> getApprovedEnrollments() {
+        return enrollmentRepository.findByStatus(Enrollment.Status.APPROVED);
+    }
+
     @Transactional
     public Enrollment approveEnrollment(Long enrollmentId) {
         Enrollment enrollment = enrollmentRepository.findById(enrollmentId)
@@ -126,4 +130,5 @@ public class CourseRegistrationService {
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
+    
 }
