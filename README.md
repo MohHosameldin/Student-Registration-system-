@@ -625,6 +625,6 @@ MIT License - See LICENSE file for details
 
 **Forza Ferrari! 🏎️💨**
 
-Made with ❤️ by [Your Name]
+Made with ❤️ by Mohamed Hosameldin
 
 </div>
