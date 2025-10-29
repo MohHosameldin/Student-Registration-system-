@@ -14,6 +14,10 @@ jobs:
     # Use the latest version of Ubuntu to run the job
     runs-on: ubuntu-latest
 
+    # ADD THIS BLOCK to grant the correct permissions
+    permissions:
+      contents: read # Allows the checkout action to read your repository's code
+
     steps:
       # Step 1: Check out your code from the repository
       - name: Checkout repository
@@ -32,3 +36,4 @@ jobs:
           file: ./Dockerfile
           push: false # We are only building, not pushing to a registry yet
           tags: course-registration-system:latest # Name the image
+
