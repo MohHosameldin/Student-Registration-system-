@@ -1,0 +1,34 @@
+# Name of your workflow
+name: Build Docker Image
+
+# Triggers: Run this workflow on every push to the 'main' branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+# Jobs: The steps to perform
+jobs:
+  build:
+    # Use the latest version of Ubuntu to run the job
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out your code from the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Docker's build tools
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # Step 3: Run the 'docker build' command
+      # This is the same command you ran on your PC
+      - name: Build the Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false # We are only building, not pushing to a registry yet
+          tags: course-registration-system:latest # Name the image
