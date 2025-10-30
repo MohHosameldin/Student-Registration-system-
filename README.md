@@ -563,7 +563,7 @@ MIT License - See LICENSE file for details
 
 ## 👥 Authors
 
-- **Your Name** - Initial work
+- **Mohamed Hosameldin** - Initial work
 
 ---
 
