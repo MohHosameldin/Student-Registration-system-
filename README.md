@@ -578,9 +578,10 @@ MIT License - See LICENSE file for details
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/course-registration-system/issues)
-- **Email**: support@example.com
-- **Documentation**: [Wiki](https://github.com/yourusername/course-registration-system/wiki)
+- **Issues**: [GitHub Issues](https://github.com/MohHosameldin/course-registration-system/issues)
+- **Email**: mohamedhosameldin496@gmail.com
+
+- **Documentation**: [Wiki](https://github.com/MohHosameldin/course-registration-system/wiki)
 
 ---
 
